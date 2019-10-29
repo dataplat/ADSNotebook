@@ -5,7 +5,7 @@ if ($packages.Name  -contains "PSScriptAnalyzer") {
     Write-Output "Installing latest version of PSScriptAnalyzer"
 
     #install PSScriptAnalyzer
-    Install-Package PSScriptAnalyzer -Force -Scope CurrentUser 
+    Install-Package PSScriptAnalyzer -Force -Scope CurrentUser
 }
 $script:ModuleName = 'ADSSQLNotebook'
 # Removes all versions of the module from the session before importing
@@ -22,7 +22,7 @@ Describe "PSScriptAnalyzer rule-sets" -Tag Build , ScriptAnalyzer {
     $Rules = Get-ScriptAnalyzerRule
     $scripts = Get-ChildItem $ModuleBase -Include *.ps1, *.psm1, *.psd1 -Recurse | Where-Object fullname -notmatch 'classes'
 
-    foreach ( $Script in $scripts ) 
+    foreach ( $Script in $scripts )
     {
         Context "Script '$($script.FullName)'" {
 
@@ -32,7 +32,7 @@ Describe "PSScriptAnalyzer rule-sets" -Tag Build , ScriptAnalyzer {
                 if ($FunctionHelpTestExceptions -contains $rule.RuleName) { continue }
                 It "Rule [$rule]" {
 
-                    (Invoke-ScriptAnalyzer -Path $script.FullName -IncludeRule $rule.RuleName ).Count | Should Be 0
+                    (Invoke-ScriptAnalyzer -Path $script.FullName -IncludeRule $rule.RuleName -Settings $ModuleBase\PSScriptAnalyzerSettings.psd1 ).Count | Should Be 0
                 }
             }
         }
