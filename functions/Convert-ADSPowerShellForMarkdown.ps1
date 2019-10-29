@@ -32,9 +32,9 @@ function Convert-ADSPowerShellForMarkdown {
         [string]$LinkText = " LINK TEXT HERE ",
         [switch]$ToClipBoard
     )
-    clear
+
     [Reflection.Assembly]::LoadWithPartialName("System.Web") | Out-Null
-    $encodedstring = [System.Web.HttpUtility]::UrlEncode($inputstring) 
+    $encodedstring = [System.Web.HttpUtility]::UrlEncode($inputstring)
     $linkage = $encodedstring.Replace('+', ' ').Replace('%3a', ':').Replace('%5c', '%5c%5c').Replace('%22', '\u0022').Replace('%27', '\u0027').Replace('%0D%0A', '').Replace('%3b%0a','\u003B ').Replace('%0a','\u000A')
 
     $outputstring = @"
@@ -45,7 +45,7 @@ function Convert-ADSPowerShellForMarkdown {
             $outputstring | Set-Clipboard
         }
         else {
-            Write-Warning "Set-Clipboard - Doesnt work on Linux - Outputting to screen" 
+            Write-Warning "Set-Clipboard - Doesnt work on Linux - Outputting to screen"
             $outputstring
         }
     }

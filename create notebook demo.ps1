@@ -15,7 +15,7 @@ The next cell will have some code in it for running
 ## Server Principals
 Below is the code to run against your instance to find the server principals that are enabled"
 
-$thirdcelltext = "SELECT Name 
+$thirdcelltext = "SELECT Name
 FROM sys.server_principals
 WHERE is_disabled = 0"
 
@@ -29,8 +29,8 @@ You should check the accounts in this list"
 
 $seventhcelltext = "EXEC sp_helpsrvrolemember 'sysadmin'"
 
-$eighthcelltext = 'Thats all folks!!  
-  
+$eighthcelltext = 'Thats all folks!!
+
 <img src="https://media.giphy.com/media/8P7y2ARUPFpNaaWEZ3/giphy.gif" height="264" title="Windmill">
 '
 

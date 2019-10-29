@@ -22,7 +22,7 @@ foreach($folder in @('internal', 'functions'))
 
         # dot source each file
 
-        $files | where-Object{ $_.name -NotLike '*.Tests.ps1'} | 
+        $files | where-Object{ $_.name -NotLike '*.Tests.ps1'} |
 
             ForEach-Object{Write-Verbose $_.basename; . $_.FullName}
 
