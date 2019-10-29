@@ -1,3 +1,30 @@
+<#
+.SYNOPSIS
+Creates a cell for an Azure Data Studio Notebook
+
+.DESCRIPTION
+Creates a text (markdown) or code (T-SQL) cell for an Azure Data Studio Notebook
+
+.PARAMETER Type
+The type of cell to create (code or text)
+
+.PARAMETER Text
+The value for the cell (markdown for text and T-SQL for celll)
+
+.EXAMPLE
+$introCelltext = "# Welcome to my Auto Generated Notebook
+
+## Automation
+Using this we can automate the creation of notebooks for our use
+"
+$Intro = New-ADSWorkBookCell -Type Text -Text $introCelltext
+
+Creates an Azure Data Studio Text cell and sets it to a variable for passing to New-AdsWorkBook
+
+.NOTES
+Rob Sewell 10/10/2019 - Initial
+#>
+
 function New-ADSWorkBookCell {
     [cmdletbinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "", Justification = "Because it doesnt really change anything")]
