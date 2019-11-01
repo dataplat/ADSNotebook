@@ -16,4 +16,5 @@ steps:
     targetType: 'inline'
     script: |
       # Publish the Module to the PowerShell Gallery
+      gci $(System.DefaultWorkingDirectory)
       Publish-Module -Path $(System.DefaultWorkingDirectory) -NuGetApiKey $(GALLERYPAT) -verbose
