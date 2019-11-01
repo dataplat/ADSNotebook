@@ -14,15 +14,15 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)'
-    ArtifactName: 'module'
+    ArtifactName: 'ADSSQLNotebook'
     publishLocation: 'Container'
 
 - task: DownloadBuildArtifacts@0
   inputs:
     buildType: 'current'
     downloadType: 'single'
-    artifactName: 'module'
-    downloadPath: '$(System.DefaultWorkingDirectory)\ADSSQLNotebook'
+    artifactName: 'ADSSQLNotebook'
+    downloadPath: '$(System.DefaultWorkingDirectory)'
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
