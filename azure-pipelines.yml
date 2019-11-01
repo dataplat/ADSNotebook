@@ -11,12 +11,21 @@ pr: none
 pool:
   vmImage: 'windows-latest'
 steps:
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'module'
+    publishLocation: 'Container'
+
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: 'current'
+    downloadType: 'single'
+    downloadPath: '$(System.ArtifactsDirectory)\ADSSQLNotebook'
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
     script: |
       # Move files to a module folder
-      New-Item $(System.DefaultWorkingDirectory)\ADSSQLNotebook -ItemType Directory
-      Move-Item -Path $(System.DefaultWorkingDirectory) -Destination $(System.DefaultWorkingDirectory)\ADSSQLNotebook
       # Publish the Module to the PowerShell Gallery
       Publish-Module -Path $(System.DefaultWorkingDirectory)\ADSSQLNotebook -NuGetApiKey $(GALLERYPAT) -verbose
