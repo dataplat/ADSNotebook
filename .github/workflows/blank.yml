@@ -1,0 +1,23 @@
+name: PR-Pester
+
+on:
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install and run Pester 
+      run: |
+        Install-Module Pester  -RequiredVersion $PesterVersion  -Force
+        Import-Module .\ADSSQLNotebook.psd1
+        $PesterResults = Invoke-Pester .\tests -ExcludeTag Integration -Show Fails -PassThru
+        If($PesterResults.FailedCount -ne 0){
+          Write-Warning "Some Tests Failed - See results above"
+          [System.Environment]::Exit(1)
+        }
+      shell: powershell
