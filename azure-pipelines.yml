@@ -16,7 +16,4 @@ steps:
     targetType: 'inline'
     script: |
       # Publish the Module to the PowerShell Gallery
-      Publish-Module -Name ADSSQLNotebook -NuGetApiKey $env:PAT -verbose
-      env:
-        PAT: $(GALLERYPAT)
-
+      Publish-Module -Name ADSSQLNotebook -NuGetApiKey $(GALLERYPAT) -verbose
