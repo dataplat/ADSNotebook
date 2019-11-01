@@ -21,6 +21,7 @@ steps:
   inputs:
     buildType: 'current'
     downloadType: 'single'
+    artifactName: 'module'
     downloadPath: '$(System.ArtifactsDirectory)\ADSSQLNotebook'
 - task: PowerShell@2
   inputs:
