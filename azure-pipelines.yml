@@ -34,14 +34,14 @@ steps:
       }
 
 - task: PublishBuildArtifacts@1
-  displayName: Publish Teh Artifact
+  displayName: Publish The Artifact
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)'
     ArtifactName: 'ADSSQLNotebook'
     publishLocation: 'Container'
 
 - task: DownloadBuildArtifacts@0
-  displayName: DOwnload the Artifact
+  displayName: Download the Artifact
   inputs:
     buildType: 'current'
     downloadType: 'single'
