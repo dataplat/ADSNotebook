@@ -15,6 +15,5 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Import-MOdule .\ADSSQLNotebook.psd1
       # Publish the Module to the PowerShell Gallery
-      Publish-Module -Name ADSSQLNotebook -NuGetApiKey $(GALLERYPAT) -verbose
+      Publish-Module -Path .\ -NuGetApiKey $(GALLERYPAT) -verbose
