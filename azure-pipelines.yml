@@ -6,6 +6,8 @@ trigger:
     exclude:
     - docs/README.md
 
+pr: none
+
 pool:
   vmImage: 'windows-latest'
 steps:
@@ -14,6 +16,7 @@ steps:
     targetType: 'inline'
     script: |
       # Publish the Module to the PowerShell Gallery
+
       Publish-Module -Name ADSSQLNotebook -NuGetApiKey $env:GALLERYPAT -verbose
 
 
