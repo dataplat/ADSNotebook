@@ -1,0 +1,19 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - docs/README.md
+
+pool:
+  vmImage: 'windows-latest'
+steps:
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Publish the Module to the PowerShell Gallery
+      Publish-Module -Name ADSSQLNotebook -NuGetApiKey $env:GALLERYPAT -verbose
+
+
