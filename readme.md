@@ -2,6 +2,8 @@
 
 A module for creating Azure Data Studio Notebooks with PowerShell
 
+[![Build Status](https://dev.azure.com/sqlcollaborative/ADSSQLNotebook/_apis/build/status/sqlcollaborative.ADSSQLNotebook?branchName=master)](https://dev.azure.com/sqlcollaborative/ADSSQLNotebook/_build/latest?definitionId=8&branchName=master)
+
 ## Functions
 
 This module contains only 3 commands at present
