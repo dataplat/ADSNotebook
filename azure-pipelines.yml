@@ -8,7 +8,6 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      PowerShell script: 
       Publish-Module -Name ADSSQLNotebook -NuGetApiKey $env:GALLERYPAT -verbose
 
 
