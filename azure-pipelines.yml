@@ -11,19 +11,45 @@ pr: none
 pool:
   vmImage: 'windows-latest'
 steps:
+- task: PowerShell@2
+  displayName: Update the Version Number
+  inputs:
+    targetType: 'inline'
+    script: |
+      $manifest = Import-PowerShellDataFile .\ADSSQLNotebook.psd1 
+      [version]$version = $Manifest.ModuleVersion
+      Write-Output "Old Version - $Version"
+      # Add one to the build of the version number
+      [version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, $Version.Minor, $ENV:SYSTEM_DEFINTIONID
+      Write-Output "New Version - $NewVersion"
+      # Update the manifest file
+      try {
+          Write-Output "Updating the Module Version to $NewVersion"
+          $path = "$pwd\ADSSQLNotebook.psd1"
+          (Get-Content .\ADSSQLNotebook.psd1) -replace $version, $NewVersion | Set-Content .\ADSSQLNotebook.psd1 -Encoding string
+          Write-Output "Updated the Module Version to $NewVersion"
+      }
+      catch {
+          Write-Error "Failed to update the Module Version - $_"
+      }
+
 - task: PublishBuildArtifacts@1
+  displayName: Publish Teh Artifact
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)'
     ArtifactName: 'ADSSQLNotebook'
     publishLocation: 'Container'
 
 - task: DownloadBuildArtifacts@0
+  displayName: DOwnload the Artifact
   inputs:
     buildType: 'current'
     downloadType: 'single'
     artifactName: 'ADSSQLNotebook'
     downloadPath: '$(System.DefaultWorkingDirectory)'
+
 - task: PowerShell@2
+  displayName: Publish to the Gallery
   inputs:
     targetType: 'inline'
     script: |
