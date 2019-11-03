@@ -16,7 +16,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $manifest = Import-PowerShellDataFile .\ADSSQLNotebook.psd1 
+      $manifest = Import-PowerShellDataFile .\ADSNotebook.psd1 
       [version]$version = $Manifest.ModuleVersion
       Write-Output "Old Version - $Version"
       # Add one to the build of the version number
@@ -25,8 +25,8 @@ steps:
       # Update the manifest file
       try {
           Write-Output "Updating the Module Version to $NewVersion"
-          $path = "$pwd\ADSSQLNotebook.psd1"
-          (Get-Content .\ADSSQLNotebook.psd1) -replace $version, $NewVersion | Set-Content .\ADSSQLNotebook.psd1 -Encoding string
+          $path = "$pwd\ADSNotebook.psd1"
+          (Get-Content .\ADSNotebook.psd1) -replace $version, $NewVersion | Set-Content .\ADSNotebook.psd1 -Encoding string
           Write-Output "Updated the Module Version to $NewVersion"
       }
       catch {
@@ -37,7 +37,7 @@ steps:
   displayName: Publish The Artifact
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)'
-    ArtifactName: 'ADSSQLNotebook'
+    ArtifactName: 'ADSNotebook'
     publishLocation: 'Container'
 
 - task: DownloadBuildArtifacts@0
@@ -45,7 +45,7 @@ steps:
   inputs:
     buildType: 'current'
     downloadType: 'single'
-    artifactName: 'ADSSQLNotebook'
+    artifactName: 'ADSNotebook'
     downloadPath: '$(System.DefaultWorkingDirectory)'
 
 - task: PowerShell@2
@@ -55,4 +55,4 @@ steps:
     script: |
       # Move files to a module folder
       # Publish the Module to the PowerShell Gallery
-      Publish-Module -Path $(System.DefaultWorkingDirectory)\ADSSQLNotebook -NuGetApiKey $(GALLERYPAT) -verbose
+      Publish-Module -Path $(System.DefaultWorkingDirectory)\ADSNotebook -NuGetApiKey $(GALLERYPAT) -verbose

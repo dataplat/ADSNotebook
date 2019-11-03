@@ -1,8 +1,8 @@
-# ADSSQLNotebook
+# ADSNotebook
 
 A module for creating Azure Data Studio Notebooks with PowerShell
 
-[![Build Status](https://dev.azure.com/sqlcollaborative/ADSSQLNotebook/_apis/build/status/sqlcollaborative.ADSSQLNotebook?branchName=master)](https://dev.azure.com/sqlcollaborative/ADSSQLNotebook/_build/latest?definitionId=8&branchName=master)
+[![Build Status](https://dev.azure.com/sqlcollaborative/ADSNotebook/_apis/build/status/sqlcollaborative.ADSNotebook?branchName=master)](https://dev.azure.com/sqlcollaborative/ADSNotebook/_build/latest?definitionId=8&branchName=master)
 
 ## Functions
 
@@ -78,3 +78,6 @@ You can install this Module from the PowerShell Gallery using
 
 This module has been tested on Windows PowerShell 5.1, PowerShell Core 6 and PowerShell 7 on Windows 10 and Ubuntu
 
+# Demo
+
+https://sqldbawithabeard.com/wp-content/uploads/2019/11/New-ADSNoteBook.mp4 
