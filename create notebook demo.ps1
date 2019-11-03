@@ -1,6 +1,6 @@
-Import-Module Git:\ADSSQLNotebook\ADSSQLNotebook.psd1
+Import-Module Git:\ADSNotebook\ADSNotebook.psd1
 
-Get-Command -Module ADSSQLNotebook
+Get-Command -Module ADSNotebook
 
 
 

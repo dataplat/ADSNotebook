@@ -14,7 +14,7 @@ jobs:
     - name: Install and run Pester 
       run: |
         Install-Module Pester  -RequiredVersion $PesterVersion  -Force
-        Import-Module .\ADSSQLNotebook.psd1
+        Import-Module .\ADSNotebook.psd1
         $PesterResults = Invoke-Pester .\tests -ExcludeTag Integration -Show Fails -PassThru
         If($PesterResults.FailedCount -ne 0){
           Write-Warning "Some Tests Failed - See results above"
