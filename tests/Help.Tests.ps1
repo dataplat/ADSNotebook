@@ -29,7 +29,7 @@ if ([System.Version]::TryParse($leaf, [ref]$parsedVersion)) {
 }
 # for VSTS build agent
 elseif ($leaf -eq 's') {
-    $ModuleName = 'ADSNotebook'
+    $ModuleName = $Env:Build_Repository_Name.Split('/')[1]
 }
 else {
     $ModuleName = $leaf
