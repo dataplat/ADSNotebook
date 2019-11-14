@@ -4,7 +4,7 @@
     Rules = @{
         PSUseCompatibleCommands = @{
             # Turns the rule on
-            Enable = $false
+            Enable = $true
 
             # Lists the PowerShell platforms we want to check compatibility with
             TargetProfiles = @(
@@ -13,10 +13,19 @@
                 'win-8_x64_10.0.17763.0_5.1.17763.316_x64_4.0.30319.42000_framework'
              #   'win-8_x64_6.2.9200.0_3.0_x64_4.0.30319.42000_framework'
             )
+            # You can specify commands to not check like this, which also will ignore its parameters:
+            IgnoreCommands = @(
+                'Set-ClipBoard', # Because we explicitly check for OS before using in ADSNotebooks module
+                'It', # Because Pester!
+                'Should', # Because Pester!
+                'Context', # Because Pester!
+                'BeforeAll', # Because Pester!
+                'Describe' # Because Pester!
+            )
         }
         PSUseCompatibleSyntax = @{
             # This turns the rule on (setting it to false will turn it off)
-            Enable = $false
+            Enable = $true
 
             # Simply list the targeted versions of PowerShell here
             TargetVersions = @(
@@ -26,4 +35,10 @@
             )
         }
     }
+        # Do not analyze the following rules. Use ExcludeRules when you have
+    # commented out the IncludeRules settings above and want to include all
+    # the default rules except for those you exclude below.
+    # Note: if a rule is in both IncludeRules and ExcludeRules, the rule
+    # will be excluded.
+    ExcludeRules = @('PSAvoidTrailingWhitespace')
 }

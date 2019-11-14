@@ -1,5 +1,3 @@
-
-function Convert-ADSPowerShellForMarkdown {
     <#
     .SYNOPSIS
     Converts PowerShell code into valid Markdown URI Link text
@@ -25,6 +23,10 @@ function Convert-ADSPowerShellForMarkdown {
     June 2019 - Rob Sewell @SQLDbaWithBeard
     SQLDBAWithABeard.Com
     #>
+
+function Convert-ADSPowerShellForMarkdown {
+    [cmdletbinding()]
+    [OutputType('System.String')]
 
     Param(
         [Parameter(Mandatory = $true)]
