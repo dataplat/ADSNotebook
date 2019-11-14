@@ -84,6 +84,7 @@ Rob Sewell 14/11/2019 - Added PowerShell Notebooks type
 
 function New-ADSWorkBook {
     [cmdletbinding(SupportsShouldProcess)]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidTrailingWhitespace", "", Justification = "the markdown requires a trailing space to work correctly")]
     Param(
         # The full path to the file
         [Parameter(Mandatory)]
