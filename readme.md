@@ -20,7 +20,9 @@ This command will create a workbook text cell or a code cell for adding to the N
 
 - New-ADSWorkBook
 
-This will create a new SQL Notebook using the cell objects created by New-ADSWorkBookCell
+This will create a new SQL Notebook using the cell objects created by New-ADSWorkBookCell. You can create a PowerShell or SQL Notebook. There are a couple fo blog posts to read here
+https://sqldbawithabeard.com/2019/11/07/create-azure-data-studio-sql-notebooks-with-powershell/
+https://sqldbawithabeard.com/2019/11/14/create-a-powershell-notebook-for-azure-data-studio-with-powershell/
 
 ## Usage
 
