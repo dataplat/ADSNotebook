@@ -20,7 +20,7 @@ steps:
       [version]$version = $Manifest.ModuleVersion
       Write-Output "Old Version - $Version"
       # Add one to the build of the version number
-      [version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, $Version.Minor, $ENV:SYSTEM_DEFINITIONID
+      [version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, $Version.Minor, $ENV:BUILD_BUILDNUMBER
       Write-Output "New Version - $NewVersion"
       # Update the manifest file
       try {
