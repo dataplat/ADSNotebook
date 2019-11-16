@@ -12,11 +12,47 @@ pool:
   vmImage: 'windows-latest'
 steps:
 - task: PowerShell@2
+  displayName: Update the Version Number
   inputs:
     targetType: 'inline'
     script: |
-      # Publish the Module to the PowerShell Gallery
-      Publish-Module -Name ADSSQLNotebook -NuGetApiKey $env:PAT -verbose
-      env:
-        PAT: $(GALLERYPAT)
+      $manifest = Import-PowerShellDataFile .\ADSNotebook.psd1 
+      [version]$version = $Manifest.ModuleVersion
+      Write-Output "Old Version - $Version"
+      # Add one to the build of the version number
+      [version]$NewVersion = "{0}.{1}.{2}" -f $Version.Major, $Version.Minor, $ENV:BUILD_BUILDNUMBER
+      Write-Output "New Version - $NewVersion"
+      # Update the manifest file
+      try {
+          Write-Output "Updating the Module Version to $NewVersion"
+          $path = "$pwd\ADSNotebook.psd1"
+          (Get-Content .\ADSNotebook.psd1) -replace $version, $NewVersion | Set-Content .\ADSNotebook.psd1 -Encoding string
+          Write-Output "Updated the Module Version to $NewVersion"
+      }
+      catch {
+          Write-Error "Failed to update the Module Version - $_"
+      }
 
+- task: PublishBuildArtifacts@1
+  displayName: Publish The Artifact
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)'
+    ArtifactName: 'ADSNotebook'
+    publishLocation: 'Container'
+
+- task: DownloadBuildArtifacts@0
+  displayName: Download the Artifact
+  inputs:
+    buildType: 'current'
+    downloadType: 'single'
+    artifactName: 'ADSNotebook'
+    downloadPath: '$(System.DefaultWorkingDirectory)'
+
+- task: PowerShell@2
+  displayName: Publish to the Gallery
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Move files to a module folder
+      # Publish the Module to the PowerShell Gallery
+      Publish-Module -Path $(System.DefaultWorkingDirectory)\ADSNotebook -NuGetApiKey $(GALLERYPAT) -verbose

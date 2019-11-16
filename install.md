@@ -1,6 +1,6 @@
-# Installing ADSSQLNotebook
+# Installing ADSNotebook
 
-## You can install ADSSQLNotebook from the Powershell Gallery using 
+## You can install ADSNotebook from the Powershell Gallery using 
 
-    Find-Module ADSSQLNotebook | Install-Module
-    Import-Module ADSSQLNotebook
+    Find-Module ADSNotebook | Install-Module
+    Import-Module ADSNotebook

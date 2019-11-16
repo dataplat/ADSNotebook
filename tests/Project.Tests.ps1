@@ -7,7 +7,7 @@ if ($packages.Name  -contains "PSScriptAnalyzer") {
     #install PSScriptAnalyzer
     Install-Package PSScriptAnalyzer -Force -Scope CurrentUser
 }
-$script:ModuleName = 'ADSSQLNotebook'
+$script:ModuleName = 'ADSNotebook'
 # Removes all versions of the module from the session before importing
 Get-Module $ModuleName | Remove-Module
 $ModuleBase = Split-Path -Parent $MyInvocation.MyCommand.Path
