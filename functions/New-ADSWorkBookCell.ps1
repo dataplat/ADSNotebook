@@ -11,6 +11,9 @@ The type of cell to create (code or text)
 .PARAMETER Text
 The value for the cell (markdown for text and T-SQL for celll)
 
+.PARAMETER Collapse
+Should the code cell be collapsed
+
 .EXAMPLE
 $introCelltext = "# Welcome to my Auto Generated Notebook
 
@@ -21,8 +24,17 @@ $Intro = New-ADSWorkBookCell -Type Text -Text $introCelltext
 
 Creates an Azure Data Studio Text cell and sets it to a variable for passing to New-AdsWorkBook
 
+.EXAMPLE
+$thirdcelltext = "SELECT Name
+FROM sys.server_principals
+WHERE is_disabled = 0"
+$Third = New-ADSWorkBookCell -Type Code -Text $thirdcelltext
+
+Creates an Azure Data Studio Code cell which will be collapsed and sets it to a variable for passing to New-AdsWorkBook
+
 .NOTES
 Rob Sewell 10/10/2019 - Initial
+Rob Sewell 19/11/2019 - Added Collapse parameter
 #>
 
 function New-ADSWorkBookCell {
@@ -37,7 +49,9 @@ function New-ADSWorkBookCell {
         # The source for the cell
         [Parameter(Mandatory)]
         [string]
-        $Text
+        $Text,
+        [switch]
+        $Collapse
     )
     $PSCmdlet.WriteVerbose('Lets create a Notebook Cell')
     switch ($type) {
@@ -69,6 +83,9 @@ function New-ADSWorkBookCell {
                 execution_count = 0
             }
         }
+    }
+    if($Collapse -and $Type -eq 'Code'){
+        $basecell.metadata | Add-Member -Name tags -Value @('hide_input') -MemberType NoteProperty
     }
     $PSCmdlet.WriteVerbose('Now we need to parse the text, first split it by line ending')
     $rawtext = $text -split "[`r`n]+"
