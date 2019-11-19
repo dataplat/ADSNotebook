@@ -48,6 +48,14 @@ $Intro = New-ADSWorkBookCell -Type Text -Text $introCelltext
 ```    
     Creates an Azure Data Studio Text cell and sets it to a variable for passing to  New-AdsWorkBook
 
+```PowerShell
+$thirdcelltext = "SELECT Name
+FROM sys.server_principals
+WHERE is_disabled = 0"
+$Third = New-ADSWorkBookCell -Type Code -Text $thirdcelltext
+```
+Creates an Azure Data Studio Code cell which will be collapsed and sets it to a variable for passing to New-AdsWorkBook
+
 ### New-ADSWorkBook - SQL
 
 ```PowerShell
