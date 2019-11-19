@@ -133,3 +133,6 @@ This module has been tested on Windows PowerShell 5.1, PowerShell Core 6 and Pow
 # Demo
 
 https://sqldbawithabeard.com/wp-content/uploads/2019/11/New-ADSNoteBook.mp4 
+
+Silly video of Notebook inception! Creating a PowerShell Notebook that creates a PowerShell Notebook with PowerShell
+https://sqldbawithabeard.com/wp-content/uploads/2019/11/2019-11-14_12-22-40.mp4
