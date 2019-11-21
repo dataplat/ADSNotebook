@@ -93,7 +93,7 @@ function New-ADSWorkBookCell {
     $PSCmdlet.WriteVerbose('Recreate the code as an array of strings with the correct line ending')
     $source = @()
     foreach ($line in $rawtext) {
-       $source += '"' + $Line + '\r\n"'
+       $source += '"' + $Line + '\r \n "'
     }
     $PSCmdlet.WriteVerbose('Source now looks like this - Each line should be a double quote and end with \r\n' + $source)
     $PSCmdlet.WriteVerbose('Add source to the base cell')
