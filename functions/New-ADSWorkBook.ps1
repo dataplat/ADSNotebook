@@ -180,11 +180,11 @@ function New-ADSWorkBook {
     $PSCmdlet.WriteVerbose('Creating the json and replacing the back slashes and double quotes')
     try {
         if($IsCoreCLR){
-            $base = ($Base | ConvertTo-Json -Depth 5 ).Replace('\\r', '\r').Replace('\\n', '\n').Replace('"\', '').Replace('\""','"')
+            $base = ($Base | ConvertTo-Json -Depth 4 ).Replace('\\r ', '\r').Replace('\\n ', '\n').Replace('"\', '').Replace('\""','"')
         }
         else{
             # Grr PowwerShell
-            $base = ($Base | ConvertTo-Json -Depth 5 ).Replace('\\r', '\r').Replace('\\n', '\n').Replace('\"\u003e','\">').Replace('"\"\u003c','"<').Replace('"\"', '"').Replace('\""','"').Replace('\u003c','<').Replace('\u003e','>')
+            $base = ($Base | ConvertTo-Json -Depth 4 ).Replace('\\r ', '\r').Replace('\\n ', '\n').Replace('\"\u003e','\">').Replace('"\"\u003c','"<').Replace('"\"', '"').Replace('\""','"').Replace('\u003c','<').Replace('\u003e','>')
         }
     }
     catch {
