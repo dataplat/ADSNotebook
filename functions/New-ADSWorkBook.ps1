@@ -115,7 +115,8 @@ function New-ADSWorkBook {
             $Base = [PSCustomObject]@{
                 metadata       = [PSCustomObject]@{
                     kernelspec = [PSCustomObject]@{
-                        name         = '.net-powershell'
+                        name     = '.net-powershell'
+                        language = "PowerShell"
                         display_name = '.NET (PowerShell)'
                     }
                 }
