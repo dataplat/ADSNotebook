@@ -12,7 +12,7 @@ The full path where you want the notebook saved - must end with .ipynb
 An array of New-AdsWorkBookCells to add to the WorkBook
 
 .PARAMETER Type
-The type of WorkBook to create - SQL or PowerShell
+The type of WorkBook to create - SQL or PowerShell or DotNetPowerShell
 
 .EXAMPLE
 $introCelltext = "# Welcome to my Auto Generated SQL Notebook
@@ -104,13 +104,33 @@ function New-ADSWorkBook {
         $cells,
         # The type of notebook
         [Parameter(Mandatory)]
-        [ValidateSet('SQL','PowerShell')]
+        [ValidateSet('SQL','PowerShell','DotNetPowerShell')]
         [string]
         $Type
     )
     $PSCmdlet.WriteVerbose('Lets create a Notebook of type $type')
     $PSCmdlet.WriteVerbose('Creating the base object')
     switch ($type) {
+        'DotNetPowerShell' {
+            $Base = [PSCustomObject]@{
+                metadata       = [PSCustomObject]@{
+                    kernelspec = [PSCustomObject]@{
+                        name         = '.net-powershell'
+                        display_name = '.NET (PowerShell)'
+                    }
+                }
+                language_info  = [PSCustomObject]@{
+                    name    = 'PowerShell'
+                    version = '7.0'
+                    pygments_lexer = 'powershell'
+                    mimetype = 'text/x-powershell'
+                    file_extension = '.ps1'
+                }
+                nbformat_minor = 4
+                nbformat       = 4
+                cells          = @()
+            }
+        }
         'PowerShell' {
             $Base = [PSCustomObject]@{
                 metadata       = [PSCustomObject]@{
@@ -160,11 +180,11 @@ function New-ADSWorkBook {
     $PSCmdlet.WriteVerbose('Creating the json and replacing the back slashes and double quotes')
     try {
         if($IsCoreCLR){
-            $base = ($Base | ConvertTo-Json -Depth 4 ).Replace('\\r', '\r').Replace('\\n', '\n').Replace('"\', '').Replace('\""','"')
+            $base = ($Base | ConvertTo-Json -Depth 5 ).Replace('\\r', '\r').Replace('\\n', '\n').Replace('"\', '').Replace('\""','"')
         }
         else{
             # Grr PowwerShell
-            $base = ($Base | ConvertTo-Json -Depth 4 ).Replace('\\r', '\r').Replace('\\n', '\n').Replace('\"\u003e','\">').Replace('"\"\u003c','"<').Replace('"\"', '"').Replace('\""','"').Replace('\u003c','<').Replace('\u003e','>')
+            $base = ($Base | ConvertTo-Json -Depth 5 ).Replace('\\r', '\r').Replace('\\n', '\n').Replace('\"\u003e','\">').Replace('"\"\u003c','"<').Replace('"\"', '"').Replace('\""','"').Replace('\u003c','<').Replace('\u003e','>')
         }
     }
     catch {
