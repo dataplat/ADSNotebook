@@ -89,6 +89,14 @@ function Convert-AdsGithubWikiToNotebook {
         Write-Verbose "Code - $code"
         Write-Verbose "Finished Line"
     }
+    
+    Write-Verbose "Set Line to new cell"
+    $block = New-ADSWorkBookCell -Type $type -Text $blockcontent
+    $blockcontent = $line
+    $cells = $cells + $block
+    $message = $cells | Out-String
+    Write-Verbose $message
+    
     if ($cells) {
         $path = $NotebookDirectory + $page.Name.replace('.md', '.ipynb')
 
