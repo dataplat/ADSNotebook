@@ -1,4 +1,34 @@
-function Convert-AdsDotNetToNotDotNet {
+<#
+.SYNOPSIS
+Converts a dotnet interactive PowerShell notebook to a Not DotNet PowerShell notebook for Azure Data Studio
+
+.DESCRIPTION
+Converts a dotnet interactive PowerShell notebook to a Not DotNet PowerShell notebook for Azure Data Studio
+
+.PARAMETER SourceNotebook
+The path to the Source Notebook
+
+.PARAMETER DestinationDirectory
+The directory to create the Not DotNet Notebook (will be created if it doesnt exist)
+
+.PARAMETER DestinationNotebook
+Optional - The name of the Destination Notebook - will retain the orignal name by default
+
+.EXAMPLE
+Convert-AdsDotNetToNotDotNet -SourceNotebook Number1.ipynb -DestinationDirectory Git:\dbatoolsnotebooks
+
+Will convert the dotnet interactive notebook Number1.iynb to not dotnet notebook and save in the Git:\dbatoolsnotebooks directory
+
+.EXAMPLE
+Convert-AdsDotNetToNotDotNet -SourceNotebook Number1.ipynb -DestinationDirectory Git:\dbatoolsnotebooks -DestinationNotebook NotNumber1
+
+Will convert the dotnet interactive notebook Number1.iynb to not dotnet notebook and save in the Git:\dbatoolsnotebooks directory and rename it to NotNumber1
+
+.NOTES
+    Some Month in 2020 - Rob Sewell @SQLDbaWithBeard
+    blog.robsewell.com
+#>
+Function Convert-AdsDotNetToNotDotNet {
         [cmdletbinding(SupportsShouldProcess)]
     Param(
         [Parameter(Mandatory)]
@@ -10,7 +40,13 @@ function Convert-AdsDotNetToNotDotNet {
     )
 
     if (Test-Path $SourceNotebook) {
-        $Source = Get-Content $SourceNotebook | ConvertFrom-Json
+        $SourceNotebookObject = Get-Item $SourceNotebook
+        if($SourceNotebookObject.Extension -eq '.ipynb'){
+            $Source = Get-Content $SourceNotebook | ConvertFrom-Json
+        } else {
+            Write-Warning "$SourceNotebook doesnt appear to be a notebook"
+            Return
+        }
     }
     else {
         Write-Warning "There doesn't appear to be anything here $SourceNotebook"

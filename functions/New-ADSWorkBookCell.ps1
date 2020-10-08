@@ -35,6 +35,8 @@ Creates an Azure Data Studio Code cell which will be collapsed and sets it to a 
 .NOTES
 Rob Sewell 10/10/2019 - Initial
 Rob Sewell 19/11/2019 - Added Collapse parameter
+Rob Sewell @SQLDbaWithBeard
+    blog.robsewell.com
 #>
 
 function New-ADSWorkBookCell {

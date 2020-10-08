@@ -34,7 +34,8 @@ foreach ($page in $wikipages) {
 Gets all of the markdown pages in the wiki location and converts them to dot net and not dotnet notebooks
 
 .NOTES
-Rob Sewell 15/08/2020 - Initial
+Rob Sewell 15/08/2020 - Rob Sewell @SQLDbaWithBeard
+    blog.robsewell.com
 #>
 function Convert-AdsGithubWikiToNotebook {
     [cmdletbinding(SupportsShouldProcess)]
