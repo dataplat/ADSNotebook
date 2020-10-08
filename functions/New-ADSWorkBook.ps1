@@ -81,6 +81,8 @@ those cells and saves it as C:\temp\dbatools.ipynb
 Rob Sewell 10/10/2019 - Initial
 Rob Sewell 14/11/2019 - Added PowerShell Notebooks type
 Rob Sewell 23/07/2020 - Added DotNetPowerShell Notebook
+Rob Sewell @SQLDbaWithBeard
+    blog.robsewell.com
 #>
 
 function New-ADSWorkBook {

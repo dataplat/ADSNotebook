@@ -21,7 +21,7 @@
 
     .NOTES
     June 2019 - Rob Sewell @SQLDbaWithBeard
-    SQLDBAWithABeard.Com
+    blog.robsewell.com
     #>
 
 function Convert-ADSPowerShellForMarkdown {
